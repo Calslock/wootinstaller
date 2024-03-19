@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Install and Configure Wootility
+Exec=curl https://raw.githubusercontent.com/Calslock/wootinstaller/master/install.sh | bash -s --
+Icon=steamdeck-gaming-return
+Terminal=true
+Type=Application
+StartupNotify=false
+
