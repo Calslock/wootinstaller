@@ -4,8 +4,8 @@
 
 # [Deck] Check if password set
 if [[ `passwd -S $USER | cut -d" " -f2` != "P" ]]
-	then
-	zenity --warning --text="Password not set! \nPlease run passwd in terminal to set password for your account, then run the installer again"
+then
+	zenity --warning --title="WootInstaller" --text="Password not set! \nPlease run passwd in terminal to set password for your account, then run the installer again"
 	exit 0
 fi
 
@@ -15,7 +15,7 @@ fi
 # Install udev rules
 echo "Installing udev rules..."
 
-sudo echo '# Wooting One Legacy
+echo '# Wooting One Legacy
 SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff01", TAG+="uaccess"
 SUBSYSTEM=="usb", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff01", TAG+="uaccess"
 
@@ -34,16 +34,32 @@ SUBSYSTEM=="hidraw", ATTRS{idVendor}=="31e3", TAG+="uaccess"
 SUBSYSTEM=="usb", ATTRS{idVendor}=="31e3", TAG+="uaccess"' > /etc/udev/rules.d/70-wooting.rules
 
 # Restart udevadm
-sudo udevadm control --reload-rules
-sudo udevadm trigger
+echo "Restarting udevadm..."
+udevadm control --reload-rules
+udevadm trigger
 
 # Install Wootility
 echo "Installing Wootility..."
-if curl -L "https://api.wooting.io/public/wootility/download?os=linux&branch=lekker" --output /home/$SUDO_USER/Desktop/Wootility.AppImage
-	then 
-	chown $SUDO_UID:$SUDO_GID /home/$SUDO_USER/Desktop/Wootility.AppImage
+
+CHANNEL=$(zenity --title="WootInstaller" --list --radiolist --text="Choose update channel:" --hide-header \
+       	--column "X" --column "Channel" \
+	TRUE "stable" \
+	FALSE "beta")
+
+if [[ -z "$CHANNEL" ]]
+then
+	zenity --title="WootInstaller" --info --text="Installation cancelled!"
+	exit 0
+fi	
+
+URL="https://api.wooting.io/public/wootility/download?os=linux&branch=lekker&channel=$CHANNEL"
+
+if curl -L $URL --output /home/$SUDO_USER/Desktop/Wootility-$CHANNEL.AppImage
+then 
+	chown $SUDO_UID:$SUDO_GID /home/$SUDO_USER/Desktop/Wootility-$CHANNEL.AppImage
 	echo "Wootility has been installed!"
-	zenity --info --text="Wootility has been installed! You can now run it from your desktop."
+	zenity --title="WootInstaller" --info --text="Wootility has been installed! You can now run it from your desktop."
 else
-	echo "Couldn't download Wootility. Please try download it manually from https://wooting.io/wootility"
+	zenity --info --title="WootInstaller" --text="Couldn't download Wootility. Please try download it manually from https://wooting.io/wootility"
 fi
+
