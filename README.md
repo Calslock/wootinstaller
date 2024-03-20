@@ -1,7 +1,7 @@
 <h1 align="center">
     WootInstaller
 <br>
-<a name="Download" href="https://github.com/Calslock/wootinstaller/releases/download/0.2.0/InstallWootility.desktop"><img src="./res/download.png" alt="Download WootInstaller" width="280px"></a>
+<a name="Download" href="https://github.com/Calslock/wootinstaller/releases/latest/download/InstallWootility.desktop"><img src="./res/download.png" alt="Download WootInstaller" width="280px"></a>
 </h1>
 
 # wootinstaller
