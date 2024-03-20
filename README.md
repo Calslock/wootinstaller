@@ -1,8 +1,14 @@
+<h1 align="center">
+    WootInstaller
+<br>
+<a name="Download" href="https://raw.githubusercontent.com/Calslock/wootinstaller/master/InstallWootility.desktop"><img src="./res/download.png" alt="Download WootInstaller" width="280px"></a>
+</h1>
+
 # wootinstaller
 Wootility auto-configurator and installer for Linux/Steam Deck
 
 # installation
-[Download this link](https://raw.githubusercontent.com/Calslock/wootinstaller/master/InstallWootility.desktop) (right-click and Save Link As...) and run it.
+Click on the image above or [download this link](https://raw.githubusercontent.com/Calslock/wootinstaller/master/InstallWootility.desktop) (right-click and Save Link As...) and run it.
 
 This will automatically set necessary udev rules for Wootility and install Wootility on your Desktop.
 
