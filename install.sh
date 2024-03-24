@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Calslock
-# Version 0.1.1
+# Version 0.2.1
 
 # [Deck] Check if password set
 if [[ `passwd -S $USER | cut -d" " -f2` != "P" ]]
@@ -57,6 +57,7 @@ URL="https://api.wooting.io/public/wootility/download?os=linux&branch=lekker&cha
 if curl -L $URL --output /home/$SUDO_USER/Desktop/Wootility-$CHANNEL.AppImage
 then 
 	chown $SUDO_UID:$SUDO_GID /home/$SUDO_USER/Desktop/Wootility-$CHANNEL.AppImage
+	chmod +x /home/$SUDO_USER/Desktop/Wootility-$CHANNEL.AppImage
 	echo "Wootility has been installed!"
 	zenity --title="WootInstaller" --info --text="Wootility has been installed! You can now run it from your desktop."
 else
